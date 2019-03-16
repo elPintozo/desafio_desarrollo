@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% block tittle %}
+	Crear Ticket
+{% endblock %}
+
+{% block container %}
+    <div class="row">
+		<div class="col-12">
+            <a href="{% url 'registros_namespace:ticket-listar' %}" class="btn btn-success">Volver</a>
+        </div>
+        <div class="col-12">
+            <form method="post">
+				{% csrf_token %}
+
+                <div class="row">
+                    <div class="col-4 offset-4">
+                        <h2>Ingresar</h2>
+                    </div>
+                    <div class="col-4 offset-4">
+                        {{form.as_table}}
+                    </div>
+                    <div class="col-4 offset-4">
+                        <button type="submit" class="btn btn-success">Crear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

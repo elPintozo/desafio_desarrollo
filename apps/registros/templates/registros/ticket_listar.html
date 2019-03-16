@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+
+{% block tittle %}
+	Lista ded Ticket
+{% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-12">
+            {% if request.user.is_superuser %}
+                <a href="{% url 'registros_namespace:ticket-crear' %}" class="btn btn-success">Crear Ticket</a>
+            {% endif %}
+            <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+        </div>
+        <div class="col-6 offset-3">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Detalles</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for ticket in lista_ticket %}
+                    <tr>
+                        <th scope="row">{{ticket.pk}}</th>
+                        <td>{{ticket.titulo|title}}</td>
+                        <td>{{ticket.descripcion|truncatechars:10}}</td>
+                        <td>{{ticket.get_estado_display}}</td>
+                        <td>{{ticket.fecha_creacion|date:"d-m-Y"}}</td>
+                        <td><a href="{% url 'registros_namespace:ticket-detalle' ticket.pk %}" class="btn btn-primary">Detalles</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                      <th scope="row" colspan="6"> No hay ticket's</th>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+
+{% block tittle %}
+	Ingresar
+{% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-12">
+            <form method="post">
+				{% csrf_token %}
+
+                <div class="row">
+                    <div class="col-4 offset-4">
+                        <h2>Ingresar</h2>
+                    </div>
+                    <div class="col-4 offset-4">
+                        <label for="last_name">Nombre de usuario</label>
+                        <input type="text" id="last_name" name="username" required>
+                    </div>
+                    <div class="col-4 offset-4">
+                        <label for="pass">Contraseña</label>
+                        <input type="password" id="pass" name="password">
+                    </div>
+                    <div class="col-4 offset-4">
+                        <button type="submit" class="btn btn-info">Ingresar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
