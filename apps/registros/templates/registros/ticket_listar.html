@@ -20,7 +20,7 @@
                     <th scope="col">Título</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">Publicado hace</th>
                     <th scope="col">Detalles</th>
                 </tr>
               </thead>
@@ -31,7 +31,13 @@
                         <td>{{ticket.titulo|title}}</td>
                         <td>{{ticket.descripcion|truncatechars:10}}</td>
                         <td>{{ticket.get_estado_display}}</td>
-                        <td>{{ticket.fecha_creacion|date:"d-m-Y"}}</td>
+                        <td>
+                            {% if ticket.dias_transcurridos == 0%}
+                                Menos de un día
+                            {% else %}
+                                {{ticket.dias_transcurridos }} días
+                            {% endif %}
+                        </td>
                         <td><a href="{% url 'registros_namespace:ticket-detalle' ticket.pk %}" class="btn btn-primary">Detalles</a></td>
                     </tr>
                 {% empty %}

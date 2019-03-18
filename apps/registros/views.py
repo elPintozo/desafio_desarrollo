@@ -1,4 +1,8 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
+from django.db.models.functions import ExtractDay
 from django.shortcuts import render, redirect
 from apps.registros.forms import ticket_form
 from apps.registros.models import ticket
@@ -39,8 +43,8 @@ def ticket_listar(request):
     ## Variable que almacena las variable para template
     data = dict()
 
-    ## Obtengo los ticket
-    data['lista_ticket'] = ticket.objects.all()
+    ## Obtengo los ticket y agrego en la queryset los dias transcurridos desde su publicacion
+    data['lista_ticket'] = ticket.objects.annotate(dias_transcurridos=ExtractDay(datetime.datetime.now()-F('fecha_creacion')))
 
     return render(request, 'registros/ticket_listar.html', data)
 
