@@ -1,0 +1,38 @@
+Instrucciones de instalación y ejecución del proyecto
+usando como sitema operativo LinuxMint
+
+# Se crea un entorno virtual para trabar
+1- $ virtualenv -p /usr/bin/python3.x nombreEntorno ##creo el entorno virtual
+2- $ source /nombreEntorno/bin/activate ##inicio el entorno virtual
+
+# Instalo lo necesario para ejecutar Django
+1- $ pip install -r requirements.txt
+
+# Instalo y configuro la base de datos
+1- $ apt-get install postgresql ## Solo si no esta instalado Postgres en el computador
+2- $ sudo -i -u postgres
+    2.1- $ createuser --interactive --pwprompt
+    2.2- $ Ingreso un nombre de usuario ## no usar mayúsculas , usar como nombre admin_desafio
+    2.3- $ Ingreso una contraseña para ese usuario ## usar como password desafio123
+    2.4- $ n
+    2.5- $ y
+    2.6- $ n
+    2.7- $ createdb nombreDB ## usa como nombre desafio_db
+        2.7.1- $ psql # inicio la base de datos
+        2.7.2- $ grant all privileges on database desafio_db to admin_desafio; # asigno el usuario a la base de datos
+        2.7.3- $ \q ## para cerrar terminal de psql
+    2.8- $ exit ## para salir de postgresql
+
+## Correr el proyecto
+3- $ git clone https://github.com/elPintozo/desafio_desarrollo.git ## Bajo el proyecto
+4- $ python manage.py makemigrations ## para generar las migraciones
+5- $ python manage.py migrate ## para traspasar los modelos de proyecto a la base de datos
+6- $ python manage.py createsuperuser
+    6.1 $ nombre del super usuario ## asignar un nombre cuaquiera
+    6.2 $ password del super usuario ## asignar una clave cualquiera
+7- $ python manage.py runserver ## para hacer correr el proyecto
+
+## Usar la plataforma
+8- Ingresar a http://127.0.0.1:8000/admin para poder crear más usuarios con o sin poder de superusuario
+9- Ingresar en http://127.0.0.1:8000 usando cualquiera de los ususarios creados
+
